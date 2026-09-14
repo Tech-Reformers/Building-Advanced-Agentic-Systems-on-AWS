@@ -5,8 +5,8 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/multi-agent/workflow/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Strands/Workflow
-    Windows: cd /d/Projects/Strands/Workflow
+    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
+    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
     uv run python workflow.py
 
 One process, one terminal. researcher -> analyst -> writer run in a fixed

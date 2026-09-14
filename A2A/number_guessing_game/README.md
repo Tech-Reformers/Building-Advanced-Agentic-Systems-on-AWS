@@ -48,8 +48,8 @@ everything required (`a2a-sdk`, `uvicorn`) installed via
 `pip install 'strands-agents[a2a]'`. Use that same venv for all three
 agents below - do not create a new one.
 
-- Mac:     `/Users/johnkrull/Projects/Strands/.venv`
-- Windows: `/d/Projects/Strands/.venv`
+- Mac:     `/Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv`
+- Windows: `/d/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv`
 
 ## Running the demo
 
@@ -62,22 +62,22 @@ in all three terminals BEFORE class starts.
 
 Terminal 1 - Alice (evaluator):
 ```bash
-cd /Users/johnkrull/Projects/Strands/A2A/number_guessing_game
-source /Users/johnkrull/Projects/Strands/.venv/bin/activate
+cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/bin/activate
 python agent_Alice.py
 ```
 
 Terminal 2 - Carol (visualiser / shuffler):
 ```bash
-cd /Users/johnkrull/Projects/Strands/A2A/number_guessing_game
-source /Users/johnkrull/Projects/Strands/.venv/bin/activate
+cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/bin/activate
 python agent_Carol.py
 ```
 
 Terminal 3 - Bob (CLI front-end - type guesses here):
 ```bash
-cd /Users/johnkrull/Projects/Strands/A2A/number_guessing_game
-source /Users/johnkrull/Projects/Strands/.venv/bin/activate
+cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/bin/activate
 python agent_Bob.py
 ```
 
@@ -85,22 +85,22 @@ python agent_Bob.py
 
 Terminal 1 - Alice (evaluator):
 ```bash
-cd /d/Projects/Strands/A2A/number_guessing_game
-source /d/Projects/Strands/.venv/Scripts/activate
+cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/Scripts/activate
 python agent_Alice.py
 ```
 
 Terminal 2 - Carol (visualiser / shuffler):
 ```bash
-cd /d/Projects/Strands/A2A/number_guessing_game
-source /d/Projects/Strands/.venv/Scripts/activate
+cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/Scripts/activate
 python agent_Carol.py
 ```
 
 Terminal 3 - Bob (CLI front-end - type guesses here):
 ```bash
-cd /d/Projects/Strands/A2A/number_guessing_game
-source /d/Projects/Strands/.venv/Scripts/activate
+cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
+source /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/.venv/Scripts/activate
 python agent_Bob.py
 ```
 

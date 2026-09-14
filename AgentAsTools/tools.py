@@ -5,8 +5,8 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/multi-agent/agents-as-tools/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Strands/AgentAsTools
-    Windows: cd /d/Projects/Strands/AgentAsTools
+    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/AgentAsTools
+    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/AgentAsTools
     uv run python tools.py
 
 One process, one terminal. The orchestrator picks between three specialist
