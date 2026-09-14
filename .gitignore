@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+
+# Demo output (regenerated every run, not source)
+report.md
+
+# Kiro local state (workspace settings are fine to commit, these aren't)
+.kiro/workspace-roots/
+.kiro/sandbox-state/
+.kiro/web-session/
