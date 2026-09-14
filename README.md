@@ -24,6 +24,8 @@ aws bedrock list-inference-profiles --region us-east-1
 
 **See [`PRE_CLASS_SETUP.md`](PRE_CLASS_SETUP.md) for the full step-by-step checklist**, with separate Mac and Windows (Git Bash) commands for every step, plus troubleshooting for the errors people actually hit (missing `strands` module, wrong venv, Bedrock access, Windows-only encoding issues, etc).
 
+A note on paths: every demo's `RUN:` block and this repo's setup docs use `Projects/Building-Advanced-Agentic-Systems-on-AWS/...` as the example path. Swap in wherever you actually cloned the repo. Mac/Linux and Windows Git Bash use the same forward-slash `cd` commands throughout — Git Bash gives Windows the same Unix-style paths as a Mac Terminal, so there's no separate Windows path syntax to learn (the only real Mac/Windows difference in this repo is the venv's internal layout, `bin/activate` vs `Scripts/activate`, called out where it matters).
+
 Quick version, if you already know what you're doing:
 ```bash
 git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git

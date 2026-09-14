@@ -5,8 +5,7 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/multi-agent/swarm/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Swarm
-    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Swarm
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS/Swarm
     uv run python swarm.py
 
 One process, one terminal. No fixed order - agents call the handoff_to_agent

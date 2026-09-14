@@ -5,8 +5,7 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/memory/overview/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Memory
-    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Memory
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS/Memory
     uv run python memory.py
 
 One process, one terminal. For the "it remembers across restarts" payoff,
@@ -17,8 +16,7 @@ TO SEE THE ACTUAL SAVED MEMORY: this demo never prints the memory file
 itself - the agent only confirms verbally that it remembered. To show the
 class the real file on disk, open another terminal and run:
     cat ~/.strands/memory/notes.json
-(full path - Mac:     /Users/johnkrull/.strands/memory/notes.json)
-(full path - Windows: /c/Users/JohnKrull/.strands/memory/notes.json)
+(full path: ~/.strands/memory/notes.json - `~` is your home folder)
 
 Pattern: by default a Strands agent starts every conversation from zero -
 no memory of past sessions. A MemoryManager gives an agent long-term

@@ -6,8 +6,7 @@ https://strandsagents.com/docs/user-guide/concepts/model-providers/amazon-bedroc
 (the "Prompt Caching" section of the Bedrock model provider page)
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Cache
-    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Cache
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS/Cache
     uv run python cache.py
 
 One process, one terminal. Makes several calls back to back and prints

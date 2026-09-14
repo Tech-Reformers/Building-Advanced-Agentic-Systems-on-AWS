@@ -11,8 +11,7 @@ protocol. A2AAgent is what makes that feel like calling a normal Strands
 Agent, even though the actual agent is running in a different process.
 
 SETUP - run in this order, in two separate terminals:
-  Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A
-  Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A
+  cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A   (both terminals)
 
   1. uv run python a2a_server.py     (start this first, leave it running)
   2. uv run python a2a_client.py     (then run this)

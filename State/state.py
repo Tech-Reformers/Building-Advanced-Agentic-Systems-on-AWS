@@ -5,8 +5,7 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/agents/state/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/State
-    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/State
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS/State
     uv run python state.py
 
 One process, one terminal. Prints each of the three state types as it

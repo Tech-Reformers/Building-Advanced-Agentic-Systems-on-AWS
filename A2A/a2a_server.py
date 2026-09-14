@@ -18,8 +18,7 @@ That's why this demo is two files instead of one:
     this second, in a separate terminal, while the server is running.
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A
-    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A
     uv run python a2a_server.py
 It will block and serve requests until you Ctrl+C it.
 
