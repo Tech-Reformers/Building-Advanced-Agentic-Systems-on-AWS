@@ -30,13 +30,12 @@ Quick version, if you already know what you're doing:
 ```bash
 git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
 cd Building-Advanced-Agentic-Systems-on-AWS
-uv venv
-source .venv/bin/activate       # Mac/Linux
-source .venv/Scripts/activate   # Windows (Git Bash)
-uv pip install 'strands-agents[a2a]' strands-agents-tools
+uv sync
 ```
 
-Each demo file's docstring has a `RUN:` block at the top with the exact commands to run it (Mac and Windows) — open the file first, run what it says.
+That's it — dependencies are declared at pinned versions in `pyproject.toml`, and `uv sync` installs them into a local `.venv`. **No venv activation needed:** every demo is run with `uv run python <file>.py`, which finds this project's environment automatically, even from a subfolder.
+
+Each demo file's docstring has a `RUN:` block at the top with the exact commands to run it — open the file first, run what it says.
 
 ## Demos
 
@@ -50,8 +49,8 @@ Each demo file's docstring has a `RUN:` block at the top with the exact commands
 | [`Memory/`](Memory/memory.py) | Long-term memory that persists across sessions (recall, injection, and agent-driven writes) | [Memory](https://strandsagents.com/docs/user-guide/concepts/memory/overview/) |
 | [`State/`](State/state.py) | The three kinds of agent state: conversation history, agent state, and invocation state | [State Management](https://strandsagents.com/docs/user-guide/concepts/agents/state/) |
 | [`Cache/`](Cache/cache.py) | Bedrock prompt caching — system prompt, tool, and automatic multi-turn caching, with cache hit/miss token metrics | [Amazon Bedrock](https://strandsagents.com/docs/user-guide/concepts/model-providers/amazon-bedrock/) |
-| [`my_agent.py`](my_agent.py) | A minimal single-agent example with custom tools, for a first "hello world" run | [Quickstart](https://strandsagents.com/docs/user-guide/quickstart/overview/) |
-| [`my_strands_agent/`](my_strands_agent/) | A `uv`-managed standalone project version of the single-agent quickstart | [Python Quickstart](https://strandsagents.com/docs/user-guide/quickstart/python/) |
+| [`my_agent.py`](my_agent.py) | A minimal single-agent example with custom tools, for a first "hello world" run — interactive, asks until you type `quit`. Uses the shared repo-root `.venv` | [Quickstart](https://strandsagents.com/docs/user-guide/quickstart/overview/) |
+| [`my_strands_agent/my_agent.py`](my_strands_agent/my_agent.py) | The same single-agent idea, but as a **standalone `uv` project** with its own `pyproject.toml` and dependencies — run it with `uv run` and no venv activation. Asks one hardcoded question | [Python Quickstart](https://strandsagents.com/docs/user-guide/quickstart/python/) |
 
 ### A2A/number_guessing_game
 
@@ -63,4 +62,6 @@ These demos were built interactively with an AI coding assistant, working direct
 
 ## License
 
-Educational use for the class this repo was built for. Adapted code samples originate from the [Strands Agents documentation](https://strandsagents.com/) (Apache 2.0) and, for `A2A/number_guessing_game`, from the [a2aproject/a2a-samples](https://github.com/a2aproject/a2a-samples) repository.
+Licensed under the Apache License 2.0 — see [`LICENSE`](LICENSE). Students are free to keep, modify, and reuse this code after class, including at work.
+
+Apache 2.0 was chosen to match the upstream sources this material adapts: the [Strands Agents documentation](https://strandsagents.com/) and, for `A2A/number_guessing_game`, the [a2aproject/a2a-samples](https://github.com/a2aproject/a2a-samples) repository — both Apache 2.0. Attribution to those sources is noted in the affected files and folder READMEs.

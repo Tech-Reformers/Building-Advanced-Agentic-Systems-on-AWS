@@ -1,3 +1,33 @@
+"""
+Single-agent "hello world" demo - interactive version.
+
+Based on the quickstart on:
+https://strandsagents.com/docs/user-guide/quickstart/overview/
+
+RUN:
+    cd Projects/Building-Advanced-Agentic-Systems-on-AWS
+    uv run python my_agent.py
+
+One process, one terminal. Unlike the multi-agent demos in the folders
+alongside this file, this is a SINGLE agent with three custom tools - the
+simplest thing in the repo, and a good first run to confirm your venv and
+Bedrock credentials work before trying the bigger patterns.
+
+It runs an interactive loop: type a question, get an answer, repeat until
+you type `quit` (or `exit` / `q`). Things to try, to watch the model pick
+a tool on its own:
+    What's a 20% tip on $75?
+    How many characters are in 'Hello World'?
+    Convert 30 Celsius to Fahrenheit
+    What's the capital of France?          <- needs no tool at all
+
+RELATED FILE: my_strands_agent/my_agent.py is a similar single-agent
+example, but packaged as its own standalone `uv` project (with a
+pyproject.toml managing its own dependencies) and asking one hardcoded
+question instead of looping. This file shares the repo-root `.venv` with
+all the other demos. See my_strands_agent/README.md for that version.
+"""
+
 from strands import Agent, tool
 from strands.models import BedrockModel
 

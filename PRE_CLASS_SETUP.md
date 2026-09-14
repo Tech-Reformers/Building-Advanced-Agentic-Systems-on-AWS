@@ -12,11 +12,10 @@
 
 1. [ ] Clone/pull the repo
 2. [ ] Install `uv`
-3. [ ] Create the shared virtual environment
-4. [ ] Install dependencies into it
-5. [ ] Configure AWS Bedrock credentials
-6. [ ] Run one demo to confirm everything works
-7. [ ] (If doing the A2A number-guessing demo) run the port check
+3. [ ] Install the dependencies (`uv sync`)
+4. [ ] Configure AWS Bedrock credentials
+5. [ ] Run one demo to confirm everything works
+6. [ ] (If doing the A2A number-guessing demo) run the port check
 
 ---
 
@@ -59,69 +58,55 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ```
 Then close and reopen your Git Bash terminal so `uv` is on your `PATH`.
 
-## 3. Create the shared virtual environment
+## 3. Install the dependencies
 
-All the top-level demo folders (`Workflow`, `Graph`, `Swarm`, `AgentAsTools`,
-`State`, `Memory`, `Cache`, `A2A`) share ONE `.venv` at the repo root.
-Create it once from the repo root:
+The repo root has a `pyproject.toml` listing everything the demos need, at
+pinned versions. One command from the repo root installs all of it:
 
 ```bash
 cd Projects/Building-Advanced-Agentic-Systems-on-AWS
-uv venv
+uv sync
 ```
 
-This creates `.venv/` at the repo root (it's git-ignored, so everyone
-creates their own).
+That creates `.venv/` at the repo root and installs the exact versions from
+`uv.lock`. It's git-ignored, so everyone gets their own.
 
-> **Windows note:** `uv venv` prints an activation hint like
-> `Activate with: .venv\Scripts\activate` - that's the cmd.exe/PowerShell
-> form and always shows that way on Windows, even in Git Bash. In Git Bash,
-> use forward slashes and `source` instead (see step 4 below):
-> `source .venv/Scripts/activate`
+**You do NOT need to activate the venv.** All the demos are run with
+`uv run python <file>.py`, and `uv run` finds this project's environment
+automatically — even from a subfolder like `Workflow/`. That's why every
+demo's `RUN:` block is just a `cd` plus a `uv run` line, with no `source
+.../activate` step.
 
-## 4. Install dependencies
+<details>
+<summary>What got installed, and why</summary>
 
-With the venv created, install everything the demos need. Use `uv pip
-install` (not plain `pip install`) - `uv venv` creates a minimal venv
-without `pip` seeded into it, so a plain `pip install` command can fall
-through to whatever `pip` is on your system `PATH` and install into your
-system/user Python instead of the venv. `uv pip install` always targets
-the active venv correctly.
-
-**Mac/Linux:**
-```bash
-source .venv/bin/activate
-uv pip install 'strands-agents[a2a]' strands-agents-tools
-```
-
-**Windows (Git Bash):**
-```bash
-source .venv/Scripts/activate
-uv pip install 'strands-agents[a2a]' strands-agents-tools
-```
-
-> **If you already ran plain `pip install` and still get
-> `ModuleNotFoundError: No module named 'strands'`:** check the install
-> output for a line like `Defaulting to user installation because normal
-> site-packages is not writeable` - that means it installed outside the
-> venv. Re-run the `uv pip install` command above instead.
-
-- `strands-agents[a2a]` pulls in the base SDK plus the `a2a-sdk` and
-  `uvicorn` extras needed for `A2A/a2a_server.py` and `A2A/a2a_client.py`.
-- `strands-agents-tools` provides `calculator`, `current_time`, etc. used
+- `strands-agents[a2a]` — the base SDK, plus the `a2a-sdk` and `uvicorn`
+  extras needed for `A2A/a2a_server.py` and `A2A/a2a_client.py`.
+- `strands-agents-tools` — provides `calculator`, `current_time`, etc. used
   by `Cache/cache.py` and `A2A/a2a_server.py`.
 - The `Memory/` demo uses `strands.memory` / `strands.vended_memory_stores`,
-  which ship with the base `strands-agents` package - no extra install.
-- The `A2A/number_guessing_game/` demo is self-contained and only needs
-  `a2a-sdk` and `uvicorn` (already covered above by the `[a2a]` extra) -
-  no LLM or AWS credentials required for that one.
+  which ship with the base `strands-agents` package — no extra install.
+- The `A2A/number_guessing_game/` demo only needs `a2a-sdk` and `uvicorn`
+  (covered by the `[a2a]` extra) — no LLM or AWS credentials for that one.
 
-You should NOT need to `deactivate`/reactivate between demos - each demo's
-`RUN:` comment includes the `cd` + you already have the venv active for
-the rest of the session. Just re-`source` the activate line in any new
-terminal tab.
+Versions are pinned exactly in `pyproject.toml` so a clone months from now
+behaves the way it did in class. To move to newer versions on purpose, edit
+those pins and re-run `uv sync`.
+</details>
 
-## 5. Configure AWS Bedrock credentials
+> **If you'd rather activate a venv the traditional way** (some editors and
+> debuggers expect it), `uv sync` already created one — activate it with
+> `source .venv/bin/activate` on Mac/Linux, or
+> `source .venv/Scripts/activate` in Windows Git Bash. Note that on Windows
+> `uv` prints the hint as `.venv\Scripts\activate` (the cmd.exe form) even
+> in Git Bash; use forward slashes and `source` as shown.
+>
+> Avoid plain `pip install` in this repo. If you see
+> `Defaulting to user installation because normal site-packages is not
+> writeable` in an install log, packages went to your system Python instead
+> of the venv — run `uv sync` and use `uv run` instead.
+
+## 4. Configure AWS Bedrock credentials
 
 Every demo except `Memory/` (partially) and `A2A/number_guessing_game/`
 calls Amazon Bedrock, so you need working AWS credentials with Bedrock
@@ -143,9 +128,10 @@ All demos are pinned to `us.anthropic.claude-sonnet-5` in `us-east-1`. If
 that model shows as inactive/legacy in your account, update the
 `model_id` in each demo file before class.
 
-## 6. Smoke test
+## 5. Smoke test
 
-Pick any demo and run it to confirm the venv + credentials work end to end.
+Pick any demo and run it to confirm the dependencies + credentials work end
+to end.
 
 ```bash
 cd Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
@@ -155,18 +141,17 @@ uv run python workflow.py
 If it prints a research -> analysis -> report chain of output with no
 `ResourceNotFoundException` or `AccessDeniedException`, you're set.
 
-Each demo file's own `RUN:` docstring has the exact `cd` + run command for
-both Mac and Windows - see:
-`Workflow/workflow.py`, `Graph/graph.py`, `Swarm/swarm.py`,
+Each demo file's own `RUN:` docstring has the exact `cd` + run command -
+see: `Workflow/workflow.py`, `Graph/graph.py`, `Swarm/swarm.py`,
 `AgentAsTools/tools.py`, `State/state.py`, `Memory/memory.py`,
 `Cache/cache.py`.
 
-## 7. A2A demos - extra pre-class steps
+## 6. A2A demos - extra pre-class steps
 
 There are two separate A2A demos:
 
 - **`A2A/a2a_server.py` + `A2A/a2a_client.py`** - uses Bedrock, needs
-  credentials from step 5. Run the server first (`uv run python
+  credentials from step 4. Run the server first (`uv run python
   a2a_server.py`), then the client in a second terminal.
 - **`A2A/number_guessing_game/`** - no LLM, no AWS needed, but runs THREE
   processes on fixed ports (8001-8003). Run the port check below before
@@ -187,23 +172,26 @@ taskkill //PID <PID> //F   # only if something printed
 
 ## Troubleshooting
 
-- **`ModuleNotFoundError: No module named 'strands'`** - two possible
-  causes:
-  1. The venv isn't activated. Re-run the `source .venv/bin/activate`
-     (Mac) or `source .venv/Scripts/activate` (Windows) line from step 4.
-  2. Dependencies were installed with plain `pip install` instead of
-     `uv pip install`, and landed outside the venv (look for "Defaulting
-     to user installation" in the install log). Re-run step 4 using
-     `uv pip install`.
+- **`ModuleNotFoundError: No module named 'strands'` (or `'a2a'`)** - most
+  likely you ran `python file.py` instead of `uv run python file.py`. Plain
+  `python` uses whatever interpreter is on your `PATH`, which isn't this
+  project's environment unless you separately activated the venv. Use
+  `uv run python <file>.py` and it works from any folder in the repo.
+
+  If you ARE using `uv run` and still see this, re-run `uv sync` from the
+  repo root — the environment may be missing or partially installed. And if
+  an earlier plain `pip install` logged `Defaulting to user installation
+  because normal site-packages is not writeable`, those packages went to
+  your system Python; `uv sync` sorts it out.
 - **`ResourceNotFoundException` on model invocation** - the pinned model
   ID (`us.anthropic.claude-sonnet-5`) is no longer active in your
   account/region. Run the `aws bedrock list-inference-profiles` command
-  from step 5 and swap in a currently active model ID.
+  from step 4 and swap in a currently active model ID. Note it appears in
+  every demo file (12 occurrences across the repo), so update all of them,
+  not just the one you're running.
 - **`AccessDeniedException`** - your AWS profile doesn't have Bedrock
   permissions, or `AWS_PROFILE`/`AWS_DEFAULT_REGION` aren't set in this
-  terminal. Re-run step 5.
-- **`ModuleNotFoundError: No module named 'a2a'`** - either the venv
-  wasn't activated, or `strands-agents[a2a]` wasn't installed (see step 4).
+  terminal. Re-run step 4.
 - **`UnicodeEncodeError` (e.g. `'charmap' codec can't encode character`)
   when `Workflow/workflow.py` or `Graph/graph.py` write `report.md`** -
   Windows-only. Python's default text-file encoding on Windows is the

@@ -43,62 +43,34 @@ confirm they actually stopped.
 
 ## Setup
 
-No separate setup needed. This project's main `.venv` (at the repo root)
-already has everything required (`a2a-sdk`, `uvicorn`) installed via
-`pip install 'strands-agents[a2a]'`. Use that same venv for all three
-agents below - do not create a new one.
+No separate setup needed. The repo-root `uv sync` from
+[`PRE_CLASS_SETUP.md`](../../PRE_CLASS_SETUP.md) already installed
+everything this demo requires (`a2a-sdk`, `uvicorn`, via the
+`strands-agents[a2a]` extra). Don't create a separate venv for this folder.
 
 ## Running the demo
 
-Open **three terminal tabs/windows**. In EACH one, paste the full block
-below for that agent - each block includes `cd` + activating the venv, so
-it works no matter what directory the terminal starts in. Do this setup
-in all three terminals BEFORE class starts.
-
-**Mac/Linux:**
+Open **three terminal tabs/windows** and paste the block below for that
+agent into each. `uv run` finds the project environment automatically, so
+there's no venv to activate — just `cd` and run. Do this in all three
+terminals BEFORE class starts.
 
 Terminal 1 - Alice (evaluator):
 ```bash
 cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/bin/activate
-python agent_Alice.py
+uv run python agent_Alice.py
 ```
 
 Terminal 2 - Carol (visualiser / shuffler):
 ```bash
 cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/bin/activate
-python agent_Carol.py
+uv run python agent_Carol.py
 ```
 
 Terminal 3 - Bob (CLI front-end - type guesses here):
 ```bash
 cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/bin/activate
-python agent_Bob.py
-```
-
-**Windows (Git Bash):**
-
-Terminal 1 - Alice (evaluator):
-```bash
-cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/Scripts/activate
-python agent_Alice.py
-```
-
-Terminal 2 - Carol (visualiser / shuffler):
-```bash
-cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/Scripts/activate
-python agent_Carol.py
-```
-
-Terminal 3 - Bob (CLI front-end - type guesses here):
-```bash
-cd Projects/Building-Advanced-Agentic-Systems-on-AWS/A2A/number_guessing_game
-source ../../.venv/Scripts/activate
-python agent_Bob.py
+uv run python agent_Bob.py
 ```
 
 Start Alice and Carol first (either order), then Bob last - Bob needs
@@ -109,14 +81,15 @@ replies with `correct! attempts: N`.
 
 ### If a command fails
 
-- `ModuleNotFoundError: No module named 'a2a'` -> the venv wasn't
-  activated, or a different `python`/`python3` is being used. Re-run the
-  `source .../activate` line and confirm the prompt shows `(.venv)` at
-  the start before running `python agent_X.py` again.
+- `ModuleNotFoundError: No module named 'a2a'` -> you ran
+  `python agent_X.py` instead of `uv run python agent_X.py`. Plain `python`
+  uses whatever interpreter is on your `PATH`, not this project's
+  environment. If you're already using `uv run`, run `uv sync` from the
+  repo root to (re)install dependencies.
 - `can't open file '.../agent_X.py': No such file or directory` -> the
   `cd` line was skipped or run in the wrong terminal. Re-run the `cd`
   line first, then retry.
-- Always run the FULL three-line block together in each terminal, don't
+- Always run BOTH lines of the block together in each terminal, don't
   split them across separate steps.
 
 During play, Bob repeatedly asks Carol to reshuffle the guess history
@@ -140,7 +113,10 @@ number_guessing_game/
 │   ├── server.py                   # Helper to spin up Starlette + SDK handler
 │   └── __init__.py                 # Re-exports
 ├── config.py                       # Centralised port configuration
-├── requirements.txt                # Runtime deps
+├── requirements.txt                # Upstream's dep list - kept for
+│                                   #   reference/attribution. You do NOT
+│                                   #   need to install it; the repo-root
+│                                   #   pyproject.toml already covers these.
 └── README.md                       # <- you are here
 ```
 

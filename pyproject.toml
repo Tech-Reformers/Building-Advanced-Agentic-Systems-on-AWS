@@ -1,0 +1,34 @@
+[project]
+name = "strands-agents-class-demos"
+version = "0.1.0"
+description = "Runnable, commented Strands Agents demos for class - Workflow, Graph, Swarm, Agents-as-Tools, State, Memory, Prompt Caching, and A2A"
+readme = "README.md"
+# The demos were built and tested on Python 3.14, but nothing here needs
+# 3.11+ features - 3.10 is the floor the Strands SDK itself supports.
+requires-python = ">=3.10"
+
+# Versions are PINNED EXACTLY on purpose. This repo is teaching material
+# that students run weeks or months after class, and the Strands SDK is
+# young and moving quickly - these demos already work around one breaking
+# change (AWS marking the SDK's old default model "Legacy"). Exact pins mean
+# a fresh clone behaves the same as it did during class instead of picking
+# up an incompatible release.
+#
+# To try newer versions deliberately: bump the numbers here, then run
+#   uv sync
+# If something breaks, `git checkout pyproject.toml uv.lock` puts you back.
+dependencies = [
+    # [a2a] adds the a2a-sdk + uvicorn extras that A2A/a2a_server.py,
+    # A2A/a2a_client.py, and A2A/number_guessing_game/ need.
+    "strands-agents[a2a]==1.32.0",
+    # Provides the prebuilt `calculator` and `current_time` tools used by
+    # Cache/cache.py and A2A/a2a_server.py.
+    "strands-agents-tools==0.2.23",
+]
+
+[tool.uv]
+# This repo is a collection of standalone demo scripts, not an installable
+# library, so there's nothing to build. package = false tells uv to just
+# manage the environment (a "virtual project") instead of trying to build
+# and install this directory as a wheel.
+package = false

@@ -2,6 +2,12 @@
 
 A beginner-friendly guide to building AI agents with Strands.
 
+This folder is already a working `uv`-managed project — the agent is in
+[`my_agent.py`](my_agent.py). **To just run it, jump to "Run the agent" below.**
+The "Build it yourself from scratch" section further down walks through
+creating an equivalent project in an empty folder, if you want to see how
+the pieces get assembled.
+
 ## What is an AI Agent?
 
 An AI agent is an LLM (like Claude) that can:
@@ -18,9 +24,47 @@ Unlike a simple chatbot, agents can take actions using the tools you give them.
 - AWS account with Bedrock access
 - `uv` package manager installed ([installation guide](https://docs.astral.sh/uv/getting-started/installation/))
 
-## Setup Instructions
+## Run the agent
 
-### 1. Create a New Project
+### 1. Configure AWS credentials
+
+```bash
+# Login to AWS (if using SSO)
+aws sso login --profile your-profile-name
+
+# Set environment variables
+export AWS_PROFILE=your-profile-name
+export AWS_DEFAULT_REGION=us-east-1
+```
+
+### 2. Run it
+
+```bash
+cd Projects/Building-Advanced-Agentic-Systems-on-AWS/my_strands_agent
+uv run python my_agent.py
+```
+
+`uv run` reads this folder's `pyproject.toml`, installs the dependencies
+into a local `.venv` if needed, and runs the script — no separate
+activation step required. Unlike the demos in the parent folders, this
+project manages its own environment.
+
+`my_agent.py` asks the agent one hardcoded question (`"How many words are
+in 'Hello world from Strands'?"`) and prints the answer, so a successful
+run is a single response and then exit. Edit that line at the bottom of
+the file to try your own prompts.
+
+> Want an interactive prompt loop instead of one hardcoded question? See
+> [`../my_agent.py`](../my_agent.py) in the repo root — same idea, but it
+> keeps asking until you type `quit`.
+
+## Build it yourself from scratch (optional)
+
+Everything below recreates this project in an empty folder. You don't need
+to do any of it to run the agent above — it's here to show where each file
+came from.
+
+### 1. Create a new project
 
 ```bash
 # Create project directory
@@ -35,25 +79,16 @@ uv add strands-agents strands-agents-tools
 ```
 
 This creates:
-- `main.py` - Your code goes here
+- `main.py` - A placeholder script `uv init` generates (this repo deleted
+  its copy and uses `my_agent.py` instead, so there's only one entry point)
 - `pyproject.toml` - Project configuration
 - `uv.lock` - Dependency versions (don't edit manually)
 - `.venv/` - Virtual environment (auto-managed by uv)
 
-### 2. Configure AWS Credentials
+### 2. Create your agent
 
-```bash
-# Login to AWS (if using SSO)
-aws sso login --profile your-profile-name
-
-# Set environment variables
-export AWS_PROFILE=your-profile-name
-export AWS_DEFAULT_REGION=us-east-1
-```
-
-### 3. Create Your Agent
-
-Replace the contents of `main.py` with:
+Create a file named `my_agent.py` with this content — a fuller version of
+the agent in this folder, mixing pre-built tools with custom ones:
 
 ```python
 from strands import Agent, tool
@@ -99,11 +134,31 @@ if __name__ == "__main__":
         agent(question)
 ```
 
-### 4. Run Your Agent
+### 3. Run your agent
 
 ```bash
-uv run python main.py
+uv run python my_agent.py
 ```
+
+> **If this fails with `ResourceNotFoundException`:** the sample above
+> creates `Agent(...)` without specifying a model, so it uses the SDK's
+> built-in default — and AWS periodically marks older model versions
+> "Legacy," which makes that default stop working with no code change on
+> your end. Every demo in this repo pins an explicit model to avoid that.
+> Compare [`my_agent.py`](my_agent.py) in this folder, which adds:
+>
+> ```python
+> from strands.models import BedrockModel
+>
+> model = BedrockModel(
+>     model_id="us.anthropic.claude-sonnet-5",
+>     region_name="us-east-1",
+> )
+> agent = Agent(model=model, tools=[...])
+> ```
+>
+> Check which models are active in your account with
+> `aws bedrock list-inference-profiles --region us-east-1`.
 
 ## Understanding the Code
 

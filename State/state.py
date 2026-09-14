@@ -241,9 +241,16 @@ if __name__ == "__main__":
     result = invocation_demo_agent("Hi there!")
     print(f"\nFinal invocation state for this one call: {result.state}")
     print(
-        "Note: this dict is fresh and empty on the NEXT call - it does not "
-        "persist like agent.state does. Run this script again and "
-        "session_count/action_count pick up nowhere (they reset, since "
-        "this demo never saves agent.state to disk) - but within a single "
-        "invocation, request_state is shared across every hook/tool call."
+        "\nHow this differs from the other two state types:\n"
+        "  - Within ONE agent() call, request_state is shared - every hook\n"
+        "    and tool invocation sees and can mutate the same dict, which is\n"
+        "    how the counter above accumulated across callback events.\n"
+        "  - On the NEXT agent() call, it starts over empty. Invocation\n"
+        "    state is per-call scratch space, not storage.\n"
+        "  - agent.state (Part 2/3) DOES persist across calls within this\n"
+        "    process. It does not survive restarting the script, though -\n"
+        "    this demo never writes it to disk, so run the script again and\n"
+        "    session_count is back to its initial 3. Persisting it across\n"
+        "    restarts is what Session Management handles; the Memory demo\n"
+        "    shows the equivalent for things the model should recall."
     )

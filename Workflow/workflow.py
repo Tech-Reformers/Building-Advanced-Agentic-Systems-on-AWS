@@ -78,8 +78,11 @@ if __name__ == "__main__":
     # AgentResult object - str(result) gives the same text print(result)
     # displays, since AgentResult defines __str__. Plain Python file I/O,
     # nothing Strands-specific here.
+    #
+    # NOTE: graph.py writes a report.md too. Both write to the current
+    # working directory, so running them from the same folder overwrites -
+    # run each from its own folder (as the RUN block says) to keep both.
     output_path = "report.md"
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(str(result))
     print(f"\nReport written to {output_path}")
-# from https://strandsagents.com/docs/user-guide/concepts/multi-agent/workflow/

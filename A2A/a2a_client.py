@@ -58,6 +58,23 @@ async def main() -> None:
     # streams the result back. Strands calls this the "Artifact" flowing
     # back to the local agent in the diagram.
     result = await a2a_agent.invoke_async("What is 10 to the power of 6?")
+
+    # Unpacking that response, one step at a time - this chain of lookups
+    # is doing more than it looks like:
+    #   result.message      -> a message dict, same shape as the entries in
+    #                          agent.messages (see the State demo)
+    #   ['content']         -> a LIST of content blocks, not a single value.
+    #                          A message can carry several blocks: text,
+    #                          toolUse, toolResult, images.
+    #   [0]                 -> the first block. Fine here because we know
+    #                          this reply is a single text block.
+    #   ['text']            -> the actual string.
+    #
+    # Be aware this is brittle by design for demo brevity: if the remote
+    # agent ever replies with a non-text block first (a tool call, say),
+    # [0]['text'] raises KeyError. Production code should look for the text
+    # block instead of assuming position 0 - something like:
+    #   text = next(b["text"] for b in result.message["content"] if "text" in b)
     print(f"Result: {result.message['content'][0]['text']}")
 
 
