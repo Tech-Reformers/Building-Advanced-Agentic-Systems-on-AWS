@@ -25,15 +25,15 @@
 **Mac/Linux:**
 ```bash
 cd ~/Projects
-git clone https://github.com/Tech-Reformers/Strands.git
-cd Strands
+git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
+cd Building-Advanced-Agentic-Systems-on-AWS
 ```
 
 **Windows (Git Bash):**
 ```bash
 cd /d/Projects
-git clone https://github.com/Tech-Reformers/Strands.git
-cd Strands
+git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
+cd Building-Advanced-Agentic-Systems-on-AWS
 ```
 
 If you already have it cloned, just `git pull` instead.
@@ -66,13 +66,13 @@ it once from the repo root:
 
 **Mac/Linux:**
 ```bash
-cd ~/Projects/Strands
+cd ~/Projects/Building-Advanced-Agentic-Systems-on-AWS
 uv venv
 ```
 
 **Windows (Git Bash):**
 ```bash
-cd /d/Projects/Strands
+cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS
 uv venv
 ```
 
@@ -133,17 +133,10 @@ Every demo except `Memory/` (partially) and `A2A/number_guessing_game/`
 calls Amazon Bedrock, so you need working AWS credentials with Bedrock
 access before class.
 
-**Mac:**
+**Mac and Windows (Git Bash):**
 ```bash
-aws sso login --profile jkdemo
-export AWS_PROFILE=jkdemo
-export AWS_DEFAULT_REGION=us-east-1
-```
-
-**Windows (Git Bash):**
-```bash
-aws sso login --profile jksandbox
-export AWS_PROFILE=jksandbox
+aws sso login --profile your-profile
+export AWS_PROFILE=your-profile
 export AWS_DEFAULT_REGION=us-east-1
 ```
 
@@ -162,13 +155,13 @@ Pick any demo and run it to confirm the venv + credentials work end to end.
 
 **Mac/Linux:**
 ```bash
-cd ~/Projects/Strands/Workflow
+cd ~/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
 uv run python workflow.py
 ```
 
 **Windows (Git Bash):**
 ```bash
-cd /d/Projects/Strands/Workflow
+cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
 uv run python workflow.py
 ```
 

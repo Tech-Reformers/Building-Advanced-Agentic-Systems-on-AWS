@@ -5,8 +5,8 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/memory/overview/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Strands/Memory
-    Windows: cd /d/Projects/Strands/Memory
+    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Memory
+    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Memory
     uv run python memory.py
 
 One process, one terminal. For the "it remembers across restarts" payoff,

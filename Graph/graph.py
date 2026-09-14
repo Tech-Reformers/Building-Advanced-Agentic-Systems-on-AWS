@@ -5,8 +5,8 @@ Consolidated from the code samples on:
 https://strandsagents.com/docs/user-guide/concepts/multi-agent/graph/
 
 RUN:
-    Mac:     cd /Users/johnkrull/Projects/Strands/Graph
-    Windows: cd /d/Projects/Strands/Graph
+    Mac:     cd /Users/johnkrull/Projects/Building-Advanced-Agentic-Systems-on-AWS/Graph
+    Windows: cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Graph
     uv run python graph.py
 
 One process, one terminal. research -> {analysis, fact_check} run in

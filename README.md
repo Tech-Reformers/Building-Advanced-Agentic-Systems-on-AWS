@@ -26,8 +26,8 @@ aws bedrock list-inference-profiles --region us-east-1
 
 Quick version, if you already know what you're doing:
 ```bash
-git clone https://github.com/Tech-Reformers/Strands.git
-cd Strands
+git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
+cd Building-Advanced-Agentic-Systems-on-AWS
 uv venv
 source .venv/bin/activate       # Mac/Linux
 source .venv/Scripts/activate   # Windows (Git Bash)
