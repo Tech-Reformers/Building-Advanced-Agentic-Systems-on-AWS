@@ -48,7 +48,7 @@ aws sso login --profile your-profile-name
 
 # Set environment variables
 export AWS_PROFILE=your-profile-name
-export AWS_DEFAULT_REGION=us-west-2
+export AWS_DEFAULT_REGION=us-east-1
 ```
 
 ### 3. Create Your Agent

@@ -22,21 +22,22 @@
 
 ## 1. Clone / pull the repo
 
-**Mac/Linux:**
+Mac/Linux and Windows Git Bash use the same commands - Git Bash gives
+Windows the same Unix-style paths as a Mac Terminal. Pick any folder
+you like to keep your projects in (this just uses `~/Projects` as an
+example - substitute wherever you keep your code):
+
 ```bash
 cd ~/Projects
 git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
 cd Building-Advanced-Agentic-Systems-on-AWS
 ```
 
-**Windows (Git Bash):**
-```bash
-cd /d/Projects
-git clone https://github.com/Tech-Reformers/Building-Advanced-Agentic-Systems-on-AWS.git
-cd Building-Advanced-Agentic-Systems-on-AWS
-```
-
 If you already have it cloned, just `git pull` instead.
+
+All later steps in this guide assume you're running commands from
+inside this repo folder (referred to as "the repo root") - no need to
+track the full path, just `cd` there once per terminal session.
 
 ## 2. Install `uv`
 
@@ -61,18 +62,11 @@ Then close and reopen your Git Bash terminal so `uv` is on your `PATH`.
 ## 3. Create the shared virtual environment
 
 All the top-level demo folders (`Workflow`, `Graph`, `Swarm`, `AgentAsTools`,
-`State`, `Memory`, `Cache`, `A2A`) share ONE `.venv` at the repo root. Create
-it once from the repo root:
+`State`, `Memory`, `Cache`, `A2A`) share ONE `.venv` at the repo root.
+Create it once from the repo root:
 
-**Mac/Linux:**
 ```bash
-cd ~/Projects/Building-Advanced-Agentic-Systems-on-AWS
-uv venv
-```
-
-**Windows (Git Bash):**
-```bash
-cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS
+cd Projects/Building-Advanced-Agentic-Systems-on-AWS
 uv venv
 ```
 
@@ -153,15 +147,8 @@ that model shows as inactive/legacy in your account, update the
 
 Pick any demo and run it to confirm the venv + credentials work end to end.
 
-**Mac/Linux:**
 ```bash
-cd ~/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
-uv run python workflow.py
-```
-
-**Windows (Git Bash):**
-```bash
-cd /d/Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
+cd Projects/Building-Advanced-Agentic-Systems-on-AWS/Workflow
 uv run python workflow.py
 ```
 
